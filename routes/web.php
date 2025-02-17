@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; // Menggunakan facade Route untuk mendefinisikan rute
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () { // Rute untuk halaman utama ('/'), mengembalikan tampilan 'welcome'
+    return view('welcome'); // Menampilkan view 'welcome.blade.php'
 });
+
+Route::resource('items', ItemController::class); // Menyediakan resource route dan secara otomatis membuat rute CRUD
