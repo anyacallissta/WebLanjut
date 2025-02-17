@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route; // Menggunakan facade Route untuk mendefinisikan rute
-
+use App\Http\Controllers\ItemController; // Mengimpor ItemController agar bisa digunakan tanpa menuliskan namespacenya
 /*
 |--------------------------------------------------------------------------
 | Web Routes
