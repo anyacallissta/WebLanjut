@@ -11,17 +11,31 @@ class UserController extends Controller
     //     return view('user', ['id' => $id, 'name' => $name]);
     // }
 
-    // jobsheet 3
+    // // jobsheet 3
+    // public function index() {
+    // // tambah data user dengan Eloquent Model
+    //     $data = [
+    //         'nama' => 'Pelanggan Pertama',
+    //     ];
+
+    //     UserModel::where('username', 'customer-1') -> update($data);
+
+    //     // coba akses model UserModel
+    //     $user = UserModel::all(); // ambil semua data dari tabel m_user
+    //     return view('user', ['data' => $user]);
+    // }
+
+    // jobsheet 4
     public function index() {
-    // tambah data user dengan Eloquent Model
         $data = [
-            'nama' => 'Pelanggan Pertama',
+            'level_id' => 2,
+            'username' => 'manager_tiga',
+            'nama' => 'Manager 3',
+            'password' => Hash::make('12345')
         ];
+        UserModel::create($data);
 
-        UserModel::where('username', 'customer-1') -> update($data);
-
-        // coba akses model UserModel
-        $user = UserModel::all(); // ambil semua data dari tabel m_user
+        $user = UserModel::all();
         return view('user', ['data' => $user]);
     }
 }
