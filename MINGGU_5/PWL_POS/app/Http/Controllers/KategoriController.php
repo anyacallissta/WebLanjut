@@ -65,7 +65,7 @@ class KategoriController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'kategori_kode' => 'required|string|max:50',
+            'kategori_kode' => 'required|string|max:10',
             'kategori_nama' => 'required|string|max:100',
         ]);
 
@@ -75,6 +75,14 @@ class KategoriController extends Controller
             'kategori_nama' => $request->kategori_nama,
         ]);
 
-        return redirect('/kategori')->with('success', 'Kategori berhasil diperbarui!');
+        return redirect('/kategori');
+    }
+
+    public function destroy($id)
+    {
+        $kategori = KategoriModel::findOrFail($id);
+        $kategori->delete();
+
+        return redirect('/kategori');
     }
 }
