@@ -309,6 +309,12 @@ return [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        [
+            'text' => 'Kategori', // add navbar manage kategori
+            'url' => '/kategori',
+            'icon' => 'bi-tags',
+            'topnav' => true,
+        ],
 
         // Sidebar items:
         [
