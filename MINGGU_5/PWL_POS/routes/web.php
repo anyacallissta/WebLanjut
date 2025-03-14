@@ -60,3 +60,7 @@ Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 // jobsheet 5
 Route::get('/kategori/create', [KategoriController::class, 'create']);
 Route::post('/kategori', [KategoriController::class, 'store']);
+
+// tugas jobsheet 5
+Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
