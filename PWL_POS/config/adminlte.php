@@ -324,6 +324,12 @@ return [
         [
             'text' => 'Level', // add navbar manage level
             'url' => '/level',
+            'icon' => 'bi-shield-check',
+            'topnav' => true,
+        ],
+        [
+            'text' => 'User', // add navbar manage user
+            'url' => '/user',
             'icon' => 'bi bi-person',
             'topnav' => true,
         ],

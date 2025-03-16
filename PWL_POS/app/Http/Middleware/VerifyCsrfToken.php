@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/kategori',
         '/barang',
-        '/level'
+        '/level',
+        '/user'
     ];
 }
