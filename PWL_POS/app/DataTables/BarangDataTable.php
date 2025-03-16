@@ -89,6 +89,8 @@ class BarangDataTable extends DataTable
             Column::make('barang_nama'),
             Column::make('harga_beli'),
             Column::make('harga_jual'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

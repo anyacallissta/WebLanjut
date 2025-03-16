@@ -12,13 +12,13 @@
     <div class="container">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Tambah Barang Baru</h3>
+                <h3 class="card-title">Tambah Barang baru</h3>
             </div>
             <form method="post" action="../barang">
                 <div class="card-body">
-                <div class="form-group">
-                        <label for="kategoriId">ID Kategori</label>
-                        <input type="text" class="form-control" id="kategoriId" name="kategoriId" placeholder="">
+                    <div class="form-group">
+                        <label for="idKategori">Id Kategori</label>
+                        <input type="text" class="form-control" id="idKategori" name="idKategori" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="kodeBarang">Kode Barang</label>

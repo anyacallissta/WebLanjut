@@ -9,27 +9,20 @@ use App\DataTables\BarangDataTable;
 
 class BarangController extends Controller
 {
-    public function index(BarangDataTable $dataTable) {
+    public function index(BarangDataTable $dataTable) 
+    {
         return $dataTable->render('barang.index');
     }
 
-    public function create() {
+    public function create() 
+    {
         return view('barang.create');
     }
 
-    public function store(Request $request) {
-        // Validasi input
-        $request->validate([
-            'kategoriId' => 'required|integer',
-            'kodeBarang' => 'required|string|max:10|unique:barang,barang_kode',
-            'namaBarang' => 'required|string|max:100',
-            'hargaBeli' => 'required|numeric|min:0',
-            'hargaJual' => 'required|numeric|min:0',
-        ]);
-
-        // Simpan ke database
+    public function store(Request $request) 
+    {
         BarangModel::create([
-            'kategori_id' => $request->kategoriId,
+            'kategori_id' => $request->idKategori,
             'barang_kode' => $request->kodeBarang,
             'barang_nama' => $request->namaBarang,
             'harga_beli' => $request->hargaBeli,
@@ -50,7 +43,8 @@ class BarangController extends Controller
     {
         // Validasi input
         $request->validate([
-            'barang_kode' => 'required|string|max:10|unique:barang,barang_kode,' . $id,
+            'kategori_id' => 'required|string|max:10',
+            'barang_kode' => 'required|string|max:10',
             'barang_nama' => 'required|string|max:100',
             'harga_beli' => 'required|numeric|min:0',
             'harga_jual' => 'required|numeric|min:0',
@@ -61,6 +55,7 @@ class BarangController extends Controller
 
         // Update data barang
         $barang->update([
+            'kategori_id' => $request->kategori_id,
             'barang_kode' => $request->barang_kode,
             'barang_nama' => $request->barang_nama,
             'harga_beli' => $request->harga_beli,
