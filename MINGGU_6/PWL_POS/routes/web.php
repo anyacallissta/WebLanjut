@@ -43,16 +43,16 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/', [UserController::class, 'store']); // menyimpan data user baru
 
     // jobsheet 6
-    Route::get('/create_ajax', [UserController::class, 'create']); // menampilkan halaman form tambah user ajax
-    Route::post('/ajax', [UserController::class, 'store']); // menyimpan data user baru ajax
+    Route::get('/create_ajax', [UserController::class, 'create_ajax']); // menampilkan halaman form tambah user ajax
+    Route::post('/ajax', [UserController::class, 'store_ajax']); // menyimpan data user baru ajax
 
     Route::get('/{id}', [UserController::class, 'show']); // menampilkan detail user
     Route::get('/{id}/edit', [UserController::class, 'edit']); // menampilkan halaman form edit user
     Route::put('/{id}', [UserController::class, 'update']); // menyimpan perubahan data user
 
     // jobsheet 6
-    Route::get('/{id}/edit_ajax', [UserController::class, 'edit']); // menampilkan halaman form edit user ajax
-    Route::put('/{id}/update_ajax', [UserController::class, 'update']); // menyimpan perubahan data user ajax
+    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // menampilkan halaman form edit user ajax
+    Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']); // menyimpan perubahan data user ajax
 
     Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
 });
