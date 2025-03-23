@@ -41,12 +41,10 @@
                     </tr>
                     <tr>
                         <th>Harga Beli</th>
-                        <td>{{ $barang->harga_beli }}</td>
                         <td class="col-9">Rp {{ number_format($barang->harga_beli, 0, ',', '.') }}</td>
                     </tr>
                     <tr>
                         <th>Harga Jual</th>
-                        <td>{{ $barang->harga_jual }}</td>
                         <td class="col-9">Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}</td>
                     </tr>
                 </table>
