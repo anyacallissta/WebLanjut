@@ -252,6 +252,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // menghapus data barang ajax
         Route::get('/import', [BarangController::class, 'import']); // menampilkan halaman form upload excel barang ajax
         Route::post('/import_ajax', [BarangController::class, 'import_ajax']); // menyimpan import excel barang ajax
+        Route::get('/export_excel', [BarangController::class, 'export_excel']); // menampilkan halaman form export excel barang ajax
     });
     
     Route::group(['prefix' => 'supplier', 'middleware' => ['authorize:ADM,MNG,SPV']], function () {
