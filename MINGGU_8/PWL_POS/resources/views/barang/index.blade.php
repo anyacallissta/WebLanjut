@@ -38,14 +38,14 @@
              <table class="table table-bordered table-sm table-striped table-hover" id="table_barang">
              <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Id Barang</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Kategori</th>
-                    <th>Harga Beli</th>
-                    <th>Harga Jual</th>
-                    <th>Aksi</th>
+                    <th style="text-align: center;">No</th>
+                    <th style="text-align: center;">Id Barang</th>
+                    <th style="text-align: center;">Kode Barang</th>
+                    <th style="text-align: center;">Nama Barang</th>
+                    <th style="text-align: center;">Kategori</th>
+                    <th style="text-align: center;">Harga Beli</th>
+                    <th style="text-align: center;">Harga Jual</th>
+                    <th style="text-align: center;">Aksi</th>
                 </tr>
              </thead>
              <tbody></tbody>
@@ -133,7 +133,7 @@
                     },
                     {
                         data: "aksi",
-                        className: "",
+                        className: "text-center",
                         orderable: false,
                         searchable: false
                     }
