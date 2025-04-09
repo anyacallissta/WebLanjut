@@ -6,7 +6,8 @@
             <h3 class="card-title">Daftar Kategori</h3>
             <div class="card-tools">
                 <button onclick="modalAction('{{ url('/kategori/import') }}')" class="btn btn-info">Import Kategori</button>
-                <a href="{{ url('/kategori/export_excel') }}" class="btn btn-primary"><i class="fa fa-fileexcel"></i>Export Kategori</a>
+                <a href="{{ url('/kategori/export_excel') }}" class="btn btn-primary"><i class="fa fa-fileexcel"></i>Export Kategori (Excel)</a>
+                <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-warning"><i class="fa fa-filepdf"></i> Export Kategori (PDF)</a>
                 <button onclick="modalAction('{{ url('/kategori/create_ajax') }}')" class="btn btn-success">Tambah Data Ajax</button>      
             </div>
         </div>
@@ -69,7 +70,7 @@
                 },
                 {
                     data: "kategori_kode",
-                    className: "",
+                    className: "text-center",
                     width: "15%",
                     orderable: true,
                     searchable: true

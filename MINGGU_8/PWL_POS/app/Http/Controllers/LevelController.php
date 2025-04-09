@@ -7,6 +7,7 @@ use App\Models\LevelModel;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LevelController extends Controller
 {
@@ -360,7 +361,7 @@ class LevelController extends Controller
     public function export_excel()
     {
         // ambil data level yang akan di export
-        $level = LevelModel::select('level_kode', 'level_nama')
+        $level = LevelModel::select('level_id', 'level_kode', 'level_nama')
             ->orderBy('level_id')
             ->get();
 
@@ -369,22 +370,24 @@ class LevelController extends Controller
         $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
 
         $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'Kode Level');
-        $sheet->setCellValue('C1', 'Nama Level');
+        $sheet->setCellValue('B1', 'Id Level');
+        $sheet->setCellValue('C1', 'Kode Level');
+        $sheet->setCellValue('D1', 'Nama Level');
 
-        $sheet->getStyle('A1:C1')->getFont()->setBold(true); // bold header
+        $sheet->getStyle('A1:D1')->getFont()->setBold(true); // bold header
 
         $no = 1; // nomor data dimulai dari 1
         $baris = 2; // baris data dimulai dari baris ke 2
         foreach ($level as $key => $value) {
             $sheet->setCellValue('A' . $baris, $no);
-            $sheet->setCellValue('B' . $baris, $value->level_kode);
-            $sheet->setCellValue('C' . $baris, $value->level_nama);
+            $sheet->setCellValue('B' . $baris, $value->level_id);
+            $sheet->setCellValue('C' . $baris, $value->level_kode);
+            $sheet->setCellValue('D' . $baris, $value->level_nama);
             $baris++;
             $no++;
         }
 
-        foreach (range('A', 'C') as $columnID) {
+        foreach (range('A', 'D') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom
         }
 
@@ -404,5 +407,18 @@ class LevelController extends Controller
 
         $writer->save('php://output');
         exit;
+    }
+
+    public function export_pdf()
+    {
+        $level = LevelModel::select('level_id', 'level_kode', 'level_nama')
+            ->orderBy('level_id')
+            ->get();
+        $pdf = Pdf::loadView('level.export_pdf', ['level' => $level]);
+        $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url
+        $pdf->render(); // Render the PDF as HTML - uncomment if you want to see the HTML output
+
+        return $pdf->stream('Data Level' . date('Y-m-d H:i:s') . '.pdf');
     }
 }

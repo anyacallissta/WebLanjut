@@ -362,8 +362,8 @@ class BarangController extends Controller
     public function export_excel()
     {
         // ambil data barang yang akan di export
-        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
-            ->orderBy('kategori_id')
+        $barang = BarangModel::select('kategori_id', 'barang_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+            ->orderBy('barang_id')
             ->with('kategori')
             ->get();
 
@@ -372,28 +372,30 @@ class BarangController extends Controller
         $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
 
         $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'Kode Barang');
-        $sheet->setCellValue('C1', 'Nama Barang');
-        $sheet->setCellValue('D1', 'Harga Beli');
-        $sheet->setCellValue('E1', 'Harga Jual');
-        $sheet->setCellValue('F1', 'Kategori');
+        $sheet->setCellValue('B1', 'Id Barang');
+        $sheet->setCellValue('C1', 'Kode Barang');
+        $sheet->setCellValue('D1', 'Nama Barang');
+        $sheet->setCellValue('E1', 'Harga Beli');
+        $sheet->setCellValue('F1', 'Harga Jual');
+        $sheet->setCellValue('G1', 'Kategori');
 
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true); // bold header
+        $sheet->getStyle('A1:G1')->getFont()->setBold(true); // bold header
 
         $no = 1; // nomor data dimulai dari 1
         $baris = 2; // baris data dimulai dari baris ke 2
         foreach ($barang as $key => $value) {
             $sheet->setCellValue('A' . $baris, $no);
-            $sheet->setCellValue('B' . $baris, $value->barang_kode);
-            $sheet->setCellValue('C' . $baris, $value->barang_nama);
-            $sheet->setCellValue('D' . $baris, $value->harga_beli);
-            $sheet->setCellValue('E' . $baris, $value->harga_jual);
-            $sheet->setCellValue('F' . $baris, $value->kategori->kategori_nama); // ambil nama kategori
+            $sheet->setCellValue('B' . $baris, $value->barang_id);
+            $sheet->setCellValue('C' . $baris, $value->barang_kode);
+            $sheet->setCellValue('D' . $baris, $value->barang_nama);
+            $sheet->setCellValue('E' . $baris, $value->harga_beli);
+            $sheet->setCellValue('F' . $baris, $value->harga_jual);
+            $sheet->setCellValue('G' . $baris, $value->kategori->kategori_nama); // ambil nama kategori
             $baris++;
             $no++;
         }
 
-        foreach (range('A', 'F') as $columnID) {
+        foreach (range('A', 'G') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom
         }
 
@@ -417,17 +419,15 @@ class BarangController extends Controller
 
     public function export_pdf()
     {
-        set_time_limit(300); // batas waktu export dalam detik
-        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
-            ->orderBy('kategori_id')
-            ->orderBy('barang_kode')
+        $barang = BarangModel::select('kategori_id', 'barang_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+            ->orderBy('barang_id')
             ->with('kategori')
             ->get();
 
         $pdf = Pdf::loadView('barang.export_pdf', ['barang' => $barang]);
         $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url
-        // $pdf->render(); // Render the PDF as HTML - uncomment if you want to see the HTML output
+        $pdf->render(); // Render the PDF as HTML - uncomment if you want to see the HTML output
 
         return $pdf->stream('Data Barang_' . date('Y-m-d H:i:s') . '.pdf');
     }

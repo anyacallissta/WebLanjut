@@ -79,30 +79,26 @@
         </tr>
     </table>
 
-    <h3 class="text-center">LAPORAN DATA BARANG</h3>
+    <h3 class="text-center">LAPORAN DATA USER</h3>
 
     <table class="border-all">
         <thead>
             <tr>
                 <th class="text-center">No</th>
-                <th class="text-center">Id Barang</th>
-                <th class="text-center">Kode Barang</th>
-                <th class="text-center">Nama Barang</th>
-                <th class="text-center">Harga Beli</th>
-                <th class="text-center">Harga Jual</th>
-                <th class="text-center">Kategori</th>
+                <th class="text-center">Id Pengguna</th>
+                <th class="text-center">Username</th>
+                <th class="text-center">Nama</th>
+                <th class="text-center">Level Pengguna</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($barang as $b)
+            @foreach($user as $b)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">{{ $b->barang_id }}</td>
-                    <td class="text-center">{{ $b->barang_kode }}</td>
-                    <td>{{ $b->barang_nama }}</td>
-                    <td class="text-right">{{ number_format($b->harga_beli, 0, ',', '.') }}</td>
-                    <td class="text-right">{{ number_format($b->harga_jual, 0, ',', '.') }}</td>
-                    <td>{{ $b->kategori->kategori_nama }}</td>
+                    <td class="text-center">{{ $b->user_id }}</td>
+                    <td>{{ $b->username }}</td>
+                    <td>{{ $b->nama }}</td>
+                    <td>{{ $b->level->level_nama }}</td>
                 </tr>
             @endforeach
         </tbody>

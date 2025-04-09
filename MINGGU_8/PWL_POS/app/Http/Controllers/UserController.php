@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -642,7 +643,7 @@ class UserController extends Controller
     public function export_excel()
     {
         // ambil data user yang akan di export
-        $user = UserModel::select('level_id', 'username', 'nama')
+        $user = UserModel::select('user_id', 'level_id', 'username', 'nama')
             ->orderBy('user_id')
             ->with('level')
             ->get();
@@ -652,24 +653,26 @@ class UserController extends Controller
         $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
 
         $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'Username');
-        $sheet->setCellValue('C1', 'Nama');
-        $sheet->setCellValue('D1', 'Level Pengguna');
+        $sheet->setCellValue('B1', 'Id Pengguna');
+        $sheet->setCellValue('C1', 'Username');
+        $sheet->setCellValue('D1', 'Nama');
+        $sheet->setCellValue('E1', 'Level Pengguna');
 
-        $sheet->getStyle('A1:D1')->getFont()->setBold(true); // bold header
+        $sheet->getStyle('A1:E1')->getFont()->setBold(true); // bold header
 
         $no = 1; // nomor data dimulai dari 1
         $baris = 2; // baris data dimulai dari baris ke 2
         foreach ($user as $key => $value) {
             $sheet->setCellValue('A' . $baris, $no);
-            $sheet->setCellValue('B' . $baris, $value->username);
-            $sheet->setCellValue('C' . $baris, $value->nama);
-            $sheet->setCellValue('D' . $baris, $value->level->level_nama); // ambil nama kategori
+            $sheet->setCellValue('B' . $baris, $value->user_id);
+            $sheet->setCellValue('C' . $baris, $value->username);
+            $sheet->setCellValue('D' . $baris, $value->nama);
+            $sheet->setCellValue('E' . $baris, $value->level->level_nama); // ambil nama kategori
             $baris++;
             $no++;
         }
 
-        foreach (range('A', 'D') as $columnID) {
+        foreach (range('A', 'E') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true); // set auto size untuk kolom
         }
 
@@ -689,5 +692,19 @@ class UserController extends Controller
 
         $writer->save('php://output');
         exit;
+    }
+
+    public function export_pdf()
+    {
+        $user = UserModel::select('user_id', 'level_id', 'username', 'nama')
+        ->orderBy('user_id')
+        ->with('level')
+        ->get();
+        $pdf = Pdf::loadView('user.export_pdf', ['user' => $user]);
+        $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url
+        $pdf->render(); // Render the PDF as HTML - uncomment if you want to see the HTML output
+
+        return $pdf->stream('Data User' . date('Y-m-d H:i:s') . '.pdf');
     }
 }
