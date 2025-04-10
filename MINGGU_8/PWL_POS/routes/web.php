@@ -8,6 +8,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -193,6 +194,11 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
     //     Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // ajax form confirm
     //     Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // ajax delete
     // });
+
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::post('/update_photo', [ProfileController::class, 'update_photo']);
+    });    
 
     Route::group(['prefix' => 'level', 'middleware' => ['authorize:ADM']], function () {
         Route::get('/', [LevelController::class, 'index']); // menampilkan halaman awal level

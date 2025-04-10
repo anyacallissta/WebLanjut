@@ -72,38 +72,6 @@
                     <p>Data Supplier</p>
                 </a>
             </li>
-
-            <!-- Logout -->
-            <li class="nav-item">
-                <a href="{{ url('/logout') }}" class="nav-link bg-danger text-white" onclick="confirmLogout(event)">
-                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                    <p>Logout</p>
-                </a>
-            </li>
         </ul>
     </nav>
 </div>
-
-<!-- konfirmasi logout -->
-<!-- SweetAlert2 -->
-<script src="{{ asset('adminlte/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-<script>
-    function confirmLogout(event) {
-        event.preventDefault();
-
-        Swal.fire({
-            title: 'Logout?',
-            text: "Apakah kamu yakin ingin keluar?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, Logout',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "{{ url('/logout') }}";
-            }
-        });
-    }
-</script>

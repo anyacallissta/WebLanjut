@@ -79,20 +79,11 @@
         <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 
         <script>
-           $.ajaxSetup({
-           headers: {
-               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-           },
-           error: function(xhr, status, error) {//sedikti tambahan debag gedebug
-               console.error('AJAX Error: ' + status + error);
-               console.error(xhr.responseText);
-               Swal.fire({
-                   icon: 'error',
-                   title: 'Server Error',
-                   text: 'An error occurred on the server. Please try again later.'
-               });
-           }
-   });
+            $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
             $(document).ready(function () {
                 $("#form-login").validate({
                     rules: {
