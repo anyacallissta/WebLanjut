@@ -1,6 +1,6 @@
-<div class="sidebar">
+<div class="sidebar d-flex flex-column h-100">
     <!-- SidebarSearch Form -->
-    <div class="form-inline mt-2">
+    <div class="form-inline mt-2 px-2">
         <div class="input-group" data-widget="sidebar-search">
             <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -12,9 +12,8 @@
     </div>
 
     <!-- Sidebar Menu -->
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            
+    <nav class="mt-2 flex-grow-1 d-flex flex-column">
+        <ul class="nav nav-pills nav-sidebar flex-column flex-grow-1" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Dashboard -->
             <li class="nav-item">
                 <a href="{{ url('/') }}" class="nav-link {{ ($activeMenu == 'dashboard') ? 'active' : '' }}">
