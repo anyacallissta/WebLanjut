@@ -43,9 +43,9 @@
         });
     }
 
-    var tableSupplier;
+    var dataSupplier;
     $(document).ready(function () {
-        tableSupplier = $('#table_supplier').DataTable({
+        dataSupplier = $('#table_supplier').DataTable({
             processing: true,
             serverSide: true,
             ajax: {

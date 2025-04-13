@@ -2,13 +2,14 @@
 
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Halo, apa kabar!!!</h3>
-        <div class="card-tools"></div>
-    </div>
-    <div class="card-body">
-        Selamat datang semua, ini adalah halaman utama dari aplikasi ini.
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-primary shadow-sm rounded-lg d-flex align-items-center">
+            <div>
+                <h4 class="mb-1">Halo, <strong>{{ Auth::user()->nama }}</strong>!</h4>
+                <p class="mb-0">Selamat datang di <strong>Point of Sale</strong>.</p>
+            </div>
+        </div>
     </div>
 </div>
 

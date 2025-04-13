@@ -17,12 +17,14 @@
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
-        <div class="card card-outline card-success">
+        <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ url('/') }}" class="h3"><b>Registrasi Pengguna</b></a>
+                <a href="{{ url('/') }}" class="h4 font-anton" style="letter-spacing: 5px;">
+                    <b>Point of Sale</b> <i class="fas fa-store"></i>
+                </a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Silakan daftar untuk membuat akun</p>
+                <h3 class="login-box-msg"><b>REGISTER</b></h3>
                 <form action="{{ url('register') }}" method="POST" id="form-register">
                     @csrf
                     <div class="input-group mb-3">
@@ -54,7 +56,7 @@
 
                     <div class="row">
                         <div class="col-12 mb-2">
-                            <button type="submit" class="btn btn-success btn-block">Daftar</button>
+                            <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
                         </div>
                         <div class="col-12 text-center">
                             <a href="{{ url('login') }}">Sudah punya akun? <strong>Login!</strong></a>

@@ -242,29 +242,25 @@ class SupplierController extends Controller
     public function delete_ajax(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
-           try {
-               $check = SupplierModel::find($id);
-               if ($check) {
-                   $check->delete();
-                   return response()->json([
-                       'status' => true,
-                       'message' => 'Data berhasil dihapus'
-                   ]);
-               } else {
-                   return response()->json([
-                       'status' => false,
-                       'message' => 'Data tidak ditemukan'
-                   ]);
-               }
-           } catch (\Exception $e) {
-               Log::error('Error deleting user: ' . $e->getMessage());
-               if (str_contains($e->getMessage(), 'SQLSTATE[23000]')) {
-                   return response()->json([
-                       'status' => false,
-                       'message' => 'Data tidak dapat dihapus karena masih terkait dengan data lain di sistem'
-                   ]);
-               }
-           }
+            if ($supplier) {
+                try {
+                    $supplier->delete();
+                return response()->json([
+                    'status'=> true,
+                    'message'=> 'Data berhasil dihapus'
+                ]);
+                } catch (\Illuminate\Database\QueryException $e) {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'Data supplier gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'
+                ]);
+                } 
+            } else {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'Data tidak ditemukan'
+                ]);
+            }
        }
        return redirect('/');
     }
@@ -398,4 +394,3 @@ class SupplierController extends Controller
         return $pdf->stream('Data Supplier' . date('Y-m-d H:i:s') . '.pdf');
     }
 }
-  

@@ -20,16 +20,20 @@
         <div class="login-box">
             <!-- /.login-logo -->
             <div class="card card-outline card-primary">
-                <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a></div>
+                <div class="card-header text-center">
+                    <a href="{{ url('/') }}" class="h4 font-anton" style="letter-spacing: 5px;">
+                        <b>Point of Sale</b> <i class="fas fa-store"></i>
+                    </a>
+                </div>
                 <div class="card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
+                    <h3 class="login-box-msg"><b>LOGIN</b></h3>
                     <form action="{{ url('login') }}" method="POST" id="form-login">
                         @csrf
                         <div class="input-group mb-3">
                             <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
+                                    <span class="fas fa-user"></span>
                                 </div>
                             </div>
                             <small id="error-username" class="error-text text-danger"></small>
@@ -43,23 +47,25 @@
                             </div>
                             <small id="error-password" class="error-text text-danger"></small>
                         </div>
-                        <div class="mb-3 text-right">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember" style="font-size: 14px;">Ingat Saya</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <!-- /.col -->
+                        <div class="mb-3 text-center">
                            <small>
                                <a href="{{url('register')}}" class="text-primary">Belum punya akun? Daftar sekarang!</a>
                            </small>
                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
                     </form>
                 </div>
                 <!-- /.card-body -->

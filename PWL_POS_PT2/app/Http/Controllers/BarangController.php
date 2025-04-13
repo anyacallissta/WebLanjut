@@ -266,30 +266,26 @@ class BarangController extends Controller
     public function delete_ajax(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
-            $check = BarangModel::find($id);
-            try {
-               $check = BarangModel::find($id);
-               if ($check) {
-                   $check->delete();
-                   return response()->json([
-                       'status' => true,
-                       'message' => 'Data berhasil dihapus'
-                   ]);
-               } else {
-                   return response()->json([
-                       'status' => false,
-                       'message' => 'Data tidak ditemukan'
-                   ]);
-               }
-           } catch (\Exception $e) {
-               Log::error('Error deleting user: ' . $e->getMessage());
-               if (str_contains($e->getMessage(), 'SQLSTATE[23000]')) {
-                   return response()->json([
-                       'status' => false,
-                       'message' => 'Data tidak dapat dihapus karena masih terkait dengan data lain di sistem'
-                   ]);
-               }
-           }
+            $barang = BarangModel::find($id);
+            if ($barang) {
+                try {
+                    $barang->delete();
+                return response()->json([
+                    'status'=> true,
+                    'message'=> 'Data berhasil dihapus'
+                ]);
+                } catch (\Illuminate\Database\QueryException $e) {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'Data barang gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'
+                ]);
+                } 
+            } else {
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'Data tidak ditemukan'
+                ]);
+            }
        }
        return redirect('/');
     }
@@ -344,6 +340,7 @@ class BarangController extends Controller
                 if (count($insert) > 0) {
                     // insert data ke database, jika data sudah ada, maka diabaikan
                     BarangModel::insertOrIgnore($insert);
+                    dataBarang.ajax.reload();
                 }
                 return response()->json([
                     'status' => true,
@@ -431,4 +428,4 @@ class BarangController extends Controller
 
         return $pdf->stream('Data Barang_' . date('Y-m-d H:i:s') . '.pdf');
     }
-} 
+}

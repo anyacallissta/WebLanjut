@@ -24,11 +24,12 @@ class PenjualanDetailSeeder extends Seeder
             $selectedBarangs = $barangs->random(3);
 
             foreach ($selectedBarangs as $barang) {
+                $jumlah = rand(1, 5); // Jumlah barang antara 1-5
                 $data[] = [
                     'penjualan_id' => $penjualan_id,
                     'barang_id' => $barang->barang_id,
-                    'harga' => $barang->harga_jual,
-                    'jumlah' => rand(1, 5), // Jumlah barang antara 1-5
+                    'jumlah' => $jumlah,
+                    'harga' => $barang->harga_jual * $jumlah,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ];

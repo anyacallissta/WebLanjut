@@ -1,3 +1,8 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+    $user = Auth::user();
+@endphp
+
 <div class="sidebar d-flex flex-column h-100">
     <!-- SidebarSearch Form -->
     <div class="form-inline mt-2 px-2">
@@ -22,22 +27,39 @@
                 </a>
             </li>
 
+            <!-- sidebar ADM only -->
             <!-- Data Pengguna -->
-            <li class="nav-header">Data Pengguna</li>
-            <li class="nav-item">
-                <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-layer-group"></i>
-                    <p>Level User</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user') ? 'active' : '' }}">
-                    <i class="nav-icon far fa-user"></i>
-                    <p>Data User</p>
-                </a>
-            </li>
+            @if ($user->level->level_kode == 'ADM')
+                <li class="nav-header">Data Pengguna</li>
+                <li class="nav-item">
+                    <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-layer-group"></i>
+                        <p>Level User</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-user"></i>
+                        <p>Data User</p>
+                    </a>
+                </li>
+            @endif
 
+            <!-- sidebar MNG only -->
+            <!-- Data Pengguna -->
+            @if ($user->level->level_kode == 'MNG')
+                <li class="nav-header">Data Pengguna</li>
+                <li class="nav-item">
+                    <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-user"></i>
+                        <p>Data User</p>
+                    </a>
+                </li>
+            @endif
+
+            <!-- sidebar ADM, MNG, SPV -->
             <!-- Data Barang -->
+            @if (in_array($user->level->level_kode, ['ADM', 'MNG', 'SPV']))
             <li class="nav-header">Data Barang</li>
             <li class="nav-item">
                 <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu == 'kategori') ? 'active' : '' }}">
@@ -72,6 +94,29 @@
                     <p>Data Supplier</p>
                 </a>
             </li>
+            @endif
+
+            <!-- sidebar STF only -->
+            <!-- Data Barang -->
+            @if ($user->level->level_kode == 'STF')
+            <li class="nav-header">Data Barang</li>
+            <li class="nav-item">
+                <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 'barang') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-list-alt"></i>
+                    <p>Data Barang</p>
+                </a>
+            </li>
+
+            <!-- Data Transaksi -->
+            <li class="nav-header">Data Transaksi</li>
+            <li class="nav-item">
+                <a href="{{ url('/penjualan') }}" class="nav-link {{ ($activeMenu == 'penjualan') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-cash-register"></i>
+                    <p>Transaksi Penjualan</p>
+                </a>
+            </li>
+            @endif
+
         </ul>
     </nav>
 </div>

@@ -40,7 +40,7 @@
                 <thead>
                 <tr>
                     <th style="text-align: center;">No</th>
-                    <th style="text-align: center;">Id Barang</th>
+                    <th style="text-align: center;">ID Barang</th>
                     <th style="text-align: center;">Kode Barang</th>
                     <th style="text-align: center;">Nama Barang</th>
                     <th style="text-align: center;">Kategori</th>
@@ -63,9 +63,9 @@
             });
         }
              
-        var tableBarang;
+        var dataBarang;
          $(document).ready(function() {
-            tableBarang = $('#table_barang').DataTable({
+            dataBarang = $('#table_barang').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -140,14 +140,19 @@
                     }
                 ]
             });
+
             $('#table-barang_filter input').unbind().bind().on('keyup', function(e){
                 if(e.keyCode == 13){ // enter key
-                    tableBarang.search(this.value).draw();
+                    dataBarang.search(this.value).draw();
                 }           
             });
-            $('.filter_kategori').change(function(){
-                tableBarang.draw();
 
+            $('.filter_kategori').change(function(){
+                dataBarang.draw();
+            });
+
+            $('#kategori_id').change(function () {
+                dataBarang.ajax.reload();
             });
         });
     </script>

@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">No</th>
-                        <th style="text-align: center;">Id Kategori</th>
+                        <th style="text-align: center;">ID Kategori</th>
                         <th style="text-align: center;">Kode Kategori</th>
                         <th style="text-align: center;">Nama Kategori</th>
                         <th style="text-align: center;">Aksi</th>

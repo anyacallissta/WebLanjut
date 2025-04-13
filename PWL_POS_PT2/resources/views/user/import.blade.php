@@ -47,7 +47,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            tableUser.ajax.reload(); // reload datatable
+                            dataUser.ajax.reload(); // reload datatable
                         }else{ // jika error
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

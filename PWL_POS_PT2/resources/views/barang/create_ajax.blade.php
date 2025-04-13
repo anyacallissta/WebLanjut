@@ -1,4 +1,4 @@
-<form action="{{ url('/barang/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/barang/ajax') }}" method="POST" id="form-create">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -47,7 +47,7 @@
 </form>
 <script>
     $(document).ready(function () {
-        $("#form-tambah").validate({
+        $("#form-create").validate({
             rules: {
                 kategori_id: { required: true },
                 barang_kode: { required: true, minlength: 3 },
