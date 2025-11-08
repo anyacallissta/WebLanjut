@@ -45,5 +45,11 @@ class BarangModel extends Model
             get: fn($image) => url('/storage/barang/' . $image),
         );
     }
+
+    public function getStokAttribute()
+    {
+        return $this->hasMany(StokModel::class, 'barang_id', 'barang_id')
+                    ->sum('stok_jumlah');
+    }
 }
   

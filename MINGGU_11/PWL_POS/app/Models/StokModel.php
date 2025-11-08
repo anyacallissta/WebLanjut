@@ -16,7 +16,7 @@ class StokModel extends Model
         'barang_id',
         'user_id',
         'stok_tanggal',
-        'stok_jumlah'
+        'stok_jumlah',
     ];
 
     // Relasi ke tabel barang (m_barang)
@@ -29,5 +29,10 @@ class StokModel extends Model
     public function user()
     {
         return $this->belongsTo(UserModel::class, 'user_id', 'user_id');
-    }    
+    }
+
+    public function penjualan()
+    {
+        return $this->hasMany(PenjualanDetailModel::class, 'barang_id', 'barang_id');
+    }
 }

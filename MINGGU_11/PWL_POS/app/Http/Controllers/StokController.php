@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StokModel;
 use App\Models\BarangModel;
 use App\Models\UserModel;
+use App\Models\PenjualanDetailModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +33,7 @@ class StokController extends Controller
 
         $barang = BarangModel::all(); // ambil semua barang
         $user = UserModel::all(); // ambil semua user
-        $penjualanDetail = PenjualanDetailModel::with('barang')->get();
+        $penjualan = PenjualanDetailModel::with('barang')->get();
 
         return view('stok.index', [
             'breadcrumb' => $breadcrumb,

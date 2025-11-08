@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Login Pengguna</title>
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -63,7 +64,7 @@
                         <!-- /.col -->
                         <div class="mb-3 text-center">
                            <small>
-                               <a href="{{url('register')}}" class="text-primary">Belum punya akun? Daftar sekarang!</a>
+                               Belum punya akun? <a href="{{url('register')}}" class="text-primary">Register</a>
                            </small>
                        </div>
                     </form>
